@@ -7,6 +7,8 @@ const {
     updateJobApplication,
     deleteJobApplication,
 } = require('../controllers/jobController');
+
+const updateJobApllicationStatus = require("../controllers/statusUpdate")
 const { protect } = require('../middleware/authMiddleware');
 const { jobValidationRules } = require('../validation/jobValidation');
 const router = express.Router();
@@ -17,7 +19,13 @@ router.route('/')
 
 router.route('/:id')
     .get(protect, getJobApplicationById)
-    .put(protect, jobValidationRules, updateJobApplication)
+    .put(protect, updateJobApplication)
+    .delete(protect, deleteJobApplication);
+
+
+router.route('/status/:id')
+    .get(protect, getJobApplicationById)
+    .patch(protect, jobValidationRules, updateJobApllicationStatus)
     .delete(protect, deleteJobApplication);
 
 module.exports = router;

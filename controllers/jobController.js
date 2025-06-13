@@ -4,15 +4,6 @@ const JobApplication = require('../models/JobApplication');
 // @desc    Get all job applications for a user
 // @route   GET /api/jobs
 // @access  Private
-// const getJobApplications = async (req, res) => {
-//     try {
-//         const jobs = await JobApplication.find({ user: req.user.id }).sort({ createdAt: -1 }); //
-//         res.json(jobs);
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).json({ message: 'Server error' });
-//     }
-// };
 const getJobApplications = async (req, res) => {
     try {
         const { page = 1, limit = 10, search = '', status = 'All', sort = 'newest' } = req.query;
@@ -175,10 +166,11 @@ const deleteJobApplication = async (req, res) => {
     }
 };
 
+
 module.exports = {
     getJobApplications,
     getJobApplicationById,
     createJobApplication,
     updateJobApplication,
-    deleteJobApplication,
+    deleteJobApplication
 };
